@@ -62,17 +62,8 @@ type Monitor struct {
 	MonitorID             string            `json:"monitor_id,omitempty"`
 	DisplayName           string            `json:"display_name"`
 	Type                  string            `json:"type"`
-	Website               string            `json:"website"`
-	CheckFrequency        string            `json:"check_frequency"`
-	HTTPMethod            string            `json:"http_method"`
-	AuthUser              string            `json:"auth_user"`
-	AuthPass              string            `json:"auth_pass"`
-	MatchingKeyword       *ValueAndSeverity `json:"matching_keyword,omitempty"`
-	UnmatchingKeyword     *ValueAndSeverity `json:"unmatching_keyword,omitempty"`
-	MatchRegex            *ValueAndSeverity `json:"match_regex,omitempty"`
-	MatchCase             bool              `json:"match_case"`
-	UserAgent             string            `json:"user_agent"`
-	CustomHeaders         []Header          `json:"custom_headers,omitempty"`
+
+	// Attributes common to more than one monitor type
 	Timeout               int               `json:"timeout"`
 	LocationProfileID     string            `json:"location_profile_id"`
 	NotificationProfileID string            `json:"notification_profile_id"`
@@ -80,8 +71,27 @@ type Monitor struct {
 	MonitorGroups         []string          `json:"monitor_groups,omitempty"`
 	UserGroupIDs          []string          `json:"user_group_ids,omitempty"`
 	ActionIDs             []ActionRef       `json:"action_ids,omitempty"`
-	UseNameServer         bool              `json:"use_name_server"`
-	UpStatusCodes         string            `json:"up_status_codes"`
+
+	// Attributes for the "Website" (URL) type monitor
+	Website               string            `json:"website,omitempty"`
+	CheckFrequency        string            `json:"check_frequency,omitempty"`
+	HTTPMethod            string            `json:"http_method,omitempty"`
+	AuthUser              string            `json:"auth_user,omitempty"`
+	AuthPass              string            `json:"auth_pass,omitempty"`
+	MatchingKeyword       *ValueAndSeverity `json:"matching_keyword,omitempty"`
+	UnmatchingKeyword     *ValueAndSeverity `json:"unmatching_keyword,omitempty"`
+	MatchRegex            *ValueAndSeverity `json:"match_regex,omitempty"`
+	MatchCase             bool              `json:"match_case,omitempty"`
+	UserAgent             string            `json:"user_agent,omitempty"`
+	CustomHeaders         []Header          `json:"custom_headers,omitempty"`
+	UseNameServer         bool              `json:"use_name_server,omitempty"`
+	UpStatusCodes         string            `json:"up_status_codes,omitempty"`
+
+	// Attributes for the "SSL/TLS Certificate" (SSL_CERT) type monitor
+	Protocol               string           `json:"protocol,omitempty"`
+	DomainName             string           `json:"domain_name,omitempty"`
+	Port                   int              `json:"port,omitempty"`
+	ExpireDays             int              `json:"expire_days,omitempty"`
 }
 
 // MonitorGroup organizes Monitor resources into groups.
